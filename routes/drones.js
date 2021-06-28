@@ -7,16 +7,16 @@ const Drone = require("../models/Drone.model");
 router.get('/drones', async (req, res) => {
   const drones = await Drone.find();
   res.render("drones/list", { drones }); 
+  //how do I check ? if the page loads the drones list ?
 });
 
-
-
+//Create
 router.get('/drones/create', (req, res) => {
   res.render("drones/create-form");
-  //how do I check ?
+  //how do I check ? console.log ? the page is working
 });
 
-router.post('/drones/create', async (req, res) => {
+router.post('/create-form', async (req, res) => {
   const { name, propellers, maxSpeed } = req.body;
   await Drone.create ({ 
       name,
@@ -24,9 +24,10 @@ router.post('/drones/create', async (req, res) => {
       maxSpeed,
   });
   res.redirect("/drones");
+  // how do I check ? the page is not creating a new one
 });
 
-/*
+
 router.get('/drones/:id/edit', async (req, res) => {
   const droneToEdit = await Drone.findById(req.params.id);
   res.render("drones/update-form", droneToEdit);
@@ -46,7 +47,7 @@ router.post('/drones/:id/edit', async (req, res) => {
   // ... your code here
 });
 
-*/
+
 
 router.post('/drones/:id/delete', async (req, res) => {
   await Drone.findByIdAndRemove(req.params.id);
